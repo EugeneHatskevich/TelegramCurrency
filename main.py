@@ -8,8 +8,6 @@ from handlers import command_handlers, message_handlers, callback_handlers
 from models.bd_connection import *
 import peewee
 
-MENU, INFO, CONVERTER, CONVERTER_SECOND, CONVERTER_END = range(5)
-
 
 def main():
     updater = Updater(BOT_TOKEN, use_context=True)

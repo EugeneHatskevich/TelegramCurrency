@@ -5,7 +5,7 @@ from config import ID_ADMIN
 import datetime
 from pytz import timezone
 from keyboard import create_keyboard
-from main import MENU
+from config import MENU
 
 
 def start(update: Update, context: CallbackContext):

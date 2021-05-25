@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.ext import CallbackContext
 from bd_functions.function import get_currency_by_code, get_all_currency
 from keyboard import create_keyboard
-from main import MENU, INFO, CONVERTER, CONVERTER_SECOND, CONVERTER_END
+from config import MENU, INFO, CONVERTER, CONVERTER_SECOND, CONVERTER_END
 
 
 def menu(update: Update, context: CallbackContext):
