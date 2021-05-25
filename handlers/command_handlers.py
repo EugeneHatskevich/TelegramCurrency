@@ -55,4 +55,4 @@ def done(update: Update, context: CallbackContext):
 
 def helps(update: Update, context: CallbackContext):
     update.message.reply_text(text='Бот поможет узнать курс валют на сегодня.\nТакже бот может помочь с конвертацией '
-                                   'валют.\nКоманда \'/start\' запускает бота.')
+                                   'валют.\nКоманда \'/start\' запускает бота!')
