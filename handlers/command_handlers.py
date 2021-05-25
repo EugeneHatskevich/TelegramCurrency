@@ -20,14 +20,18 @@ def update_bd(update: Update, context: CallbackContext):
     """Команда для установления ежедневного обновления информации по курсам валют"""
     chat_id = update.message.chat_id
     if chat_id == ID_ADMIN:
-        context.job_queue.run_daily(update_data,
-                                    time=datetime.time(11,
-                                                       10,
-                                                       tzinfo=timezone('Europe/Minsk')),
-                                    context=chat_id,
-                                    name=f'{str(chat_id)}_update_bd')
+        # context.job_queue.run_daily(update_data,
+        #                             time=datetime.time(11,
+        #                                                10,
+        #                                                tzinfo=timezone('Europe/Minsk')),
+        #                             context=chat_id,
+        #                             name=f'{str(chat_id)}_update_bd')
+        # update.message.reply_text(
+        #     text='Ежедневные обновления установлены',
+        # )
+        update_data()
         update.message.reply_text(
-            text='Ежедневные обновления установлены',
+             text='Обновлено',
         )
     else:
         update.message.reply_text(
