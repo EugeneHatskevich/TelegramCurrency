@@ -22,7 +22,7 @@ def update_bd(update: Update, context: CallbackContext):
     if chat_id == ID_ADMIN:
         context.job_queue.run_daily(update_data,
                                     time=datetime.time(1,
-                                                       0,
+                                                       10,
                                                        tzinfo=timezone('Europe/Minsk')),
                                     context=chat_id,
                                     name=f'{str(chat_id)}_update_bd')
