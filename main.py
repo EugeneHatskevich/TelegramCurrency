@@ -1,4 +1,5 @@
 from config import BOT_TOKEN
+from config import MENU, INFO, CONVERTER, CONVERTER_SECOND, CONVERTER_END
 from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext import ConversationHandler, CallbackQueryHandler
