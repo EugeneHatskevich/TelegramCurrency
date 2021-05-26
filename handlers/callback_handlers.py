@@ -1,8 +1,10 @@
 from telegram import Update
 from telegram.ext import CallbackContext
-from bd_functions.function import get_currency_by_code, get_all_currency
+from bd_functions.function import get_currency_by_code
 from keyboard import create_keyboard
 from config import MENU, INFO, CONVERTER, CONVERTER_SECOND, CONVERTER_END
+from source.keyboard_list import main_button_for_info, main_button_for_converter
+from create_button_list import create_button_list
 
 
 def menu(update: Update, context: CallbackContext):
@@ -17,22 +19,15 @@ def menu(update: Update, context: CallbackContext):
 def info(update: Update, context: CallbackContext):
     query = update.callback_query
     query.answer()
-    all_currency = get_all_currency()
     if query.data == 'info':
-        buttons = {}
-        for currency in all_currency:
-            if currency.name in ['Доллар США', 'Евро', 'Российский рубль']:
-                buttons[currency.code] = currency.name
+        buttons = create_button_list(True, main_button_for_info)
         buttons['other'] = 'Другие...'
         update.callback_query.edit_message_text(text="Выберите валюту",
                                                 reply_markup=create_keyboard(buttons))
         return INFO
 
     elif query.data == 'other':
-        other_buttons = {}
-        for currency in all_currency:
-            if currency.name not in ['Доллар США', 'Евро', 'Российский рубль']:
-                other_buttons[currency.code] = currency.name
+        other_buttons = create_button_list(False, main_button_for_info)
         other_buttons['info'] = 'Вернуться назад'
         update.callback_query.edit_message_text(text="Выберите валюту",
                                                 reply_markup=create_keyboard(other_buttons))
@@ -52,22 +47,15 @@ def info(update: Update, context: CallbackContext):
 def converter(update: Update, context: CallbackContext):
     query = update.callback_query
     query.answer()
-    all_currency = get_all_currency()
     if query.data == 'converter':
-        buttons = {}
-        for currency in all_currency:
-            if currency.name in ['Доллар США', 'Евро', 'Российский рубль']:
-                buttons[currency.code] = currency.name
+        buttons = create_button_list(True, main_button_for_converter)
         buttons['converter_other'] = 'Другие...'
         update.callback_query.edit_message_text(text="Выберите первую валюту",
                                                 reply_markup=create_keyboard(buttons))
         return CONVERTER
 
     elif query.data == 'converter_other':
-        other_buttons = {}
-        for currency in all_currency:
-            if currency.name not in ['Доллар США', 'Евро', 'Российский рубль']:
-                other_buttons[currency.code] = currency.name
+        other_buttons = create_button_list(False, main_button_for_converter)
         other_buttons['converter'] = 'Вернуться назад'
         update.callback_query.edit_message_text(text="Выберите первую валюту",
                                                 reply_markup=create_keyboard(other_buttons))
@@ -76,10 +64,7 @@ def converter(update: Update, context: CallbackContext):
     else:
         first = query.data
         context.user_data['First'] = first
-        buttons = {}
-        for currency in all_currency:
-            if currency.name in ['Доллар США', 'Евро', 'Российский рубль', 'Белорусский рубль']:
-                buttons[currency.code] = currency.name
+        buttons = create_button_list(True, main_button_for_converter)
         buttons['converter_other'] = 'Другие...'
         update.callback_query.edit_message_text(text="Выберите вторую валюту",
                                                 reply_markup=create_keyboard(buttons))
@@ -89,22 +74,15 @@ def converter(update: Update, context: CallbackContext):
 def converter_second(update: Update, context: CallbackContext):
     query = update.callback_query
     query.answer()
-    all_currency = get_all_currency()
     if query.data == 'converter':
-        buttons = {}
-        for currency in all_currency:
-            if currency.name in ['Доллар США', 'Евро', 'Российский рубль', 'Белорусский рубль']:
-                buttons[currency.code] = currency.name
+        buttons = create_button_list(True, main_button_for_converter)
         buttons['converter_other'] = 'Другие...'
         update.callback_query.edit_message_text(text="Выберите вторую валюту",
                                                 reply_markup=create_keyboard(buttons))
         return CONVERTER_SECOND
 
     elif query.data == 'converter_other':
-        other_buttons = {}
-        for currency in all_currency:
-            if currency.name not in ['Доллар США', 'Евро', 'Российский рубль']:
-                other_buttons[currency.code] = currency.name
+        other_buttons = create_button_list(False, main_button_for_converter)
         other_buttons['converter'] = 'Вернуться назад'
         update.callback_query.edit_message_text(text="Выберите вторую валюту",
                                                 reply_markup=create_keyboard(other_buttons))

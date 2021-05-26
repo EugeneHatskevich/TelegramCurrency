@@ -7,6 +7,7 @@ db = SqliteDatabase(db_name)
 
 
 class Currency(Model):
+    id = PrimaryKeyField()
     name = CharField()
     count = IntegerField()
     code = CharField()

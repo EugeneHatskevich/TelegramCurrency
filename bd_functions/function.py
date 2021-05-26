@@ -20,14 +20,16 @@ def create_data():
     """ Создание таблицы """
     data = parse(URL)
     for i in data:
-        create_currency(i,
-                        int(data[i]['Количество и код страны'].split(' ')[0]),
-                        data[i]['Количество и код страны'].split(' ')[1],
-                        float(data[i]["Официальный курс"].replace(',', '.')))
+        create_currency(i['Cur_ID'],
+                        i['Cur_Name'],
+                        i['Cur_Scale'],
+                        i['Cur_Abbreviation'],
+                        i['Cur_OfficialRate'])
 
 
-def create_currency(name: str, count: int, code: str, value: float):
-    row = Currency.create(name=name.strip(),
+def create_currency(cur_id: int, name: str, count: int, code: str, value: float):
+    row = Currency.create(id=cur_id,
+                          name=name.strip(),
                           count=count,
                           code=code,
                           value=value)
@@ -38,12 +40,12 @@ def update_data():
     """ Обновление данных """
     data = parse(URL)
     for i in data:
-        update_currency(i,
-                        int(data[i]['Количество и код страны'].split(' ')[0]),
-                        float(data[i]["Официальный курс"].replace(',', '.')))
+        update_currency(i['Cur_ID'],
+                        i['Cur_Scale'],
+                        i['Cur_OfficialRate'])
 
 
-def update_currency(name: str, count: int, value: float):
+def update_currency(cur_id: int, count: int, value: float):
     Currency.update(count=count,
                     value=value,
-                    updated_at=datetime.datetime.now()).where(Currency.name == name).execute()
+                    updated_at=datetime.datetime.now()).where(Currency.id == cur_id).execute()
