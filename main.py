@@ -8,7 +8,7 @@ from telegram.ext import CommandHandler
 from handlers import command_handlers, message_handlers, callback_handlers
 from models.bd_connection import *
 import peewee
-
+import
 
 def main():
     updater = Updater(BOT_TOKEN, use_context=True)
